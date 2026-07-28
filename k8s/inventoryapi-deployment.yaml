@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventoryapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventoryapi
+  template:
+    metadata:
+      labels:
+        app: inventoryapi
+    spec:
+      containers:
+        - name: inventoryapi
+          image: inventoryapi
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: inventory-config
+                  key: ASPNETCORE_ENVIRONMENT
+            - name: ConnectionStrings__Default
+              value: "Host=postgres;Port=5432;Database=inventorydb;Username=postgres;Password=postgres"
