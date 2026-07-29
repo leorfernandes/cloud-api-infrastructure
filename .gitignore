@@ -6,3 +6,7 @@ obj/
 appsettings.Development.json
 TestResults/
 coveragereport/
+.terraform/
+.terraform.lock.hcl
+throwaway_key
+throwaway_key.pub
